@@ -15,5 +15,12 @@ spec:
       containers:
       - name: example-container
         image: nginx:latest
-  nodeSelector:
-    hardware-type: gpu
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: hardware-type
+            operator: In
+            values:
+            - gpu
